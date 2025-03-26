@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f4f4f4; }
+        .btn { padding: 5px 10px; text-decoration: none; border-radius: 5px; }
+        .edit-btn { background-color: #4CAF50; color: white; }
+        .delete-btn { background-color: #f44336; color: white; }
+        .pagination { margin-top: 10px; text-align: center; }
+        .pagination a { margin: 0 5px; text-decoration: none; padding: 5px 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+<h2>게시판</h2>
+
+<!-- 로그인한 사용자만 글쓰기 가능 -->
+<div th:if="${session.account != null}">
+    <a th:href="@{/board/write}" class="btn">글쓰기</a>
+    <a th:href="@{/}" class="btn">메인으로</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${board}">
+        <td th:text="${post.id}"></td>
+        <td><a th:href="@{/board/list/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
+        <td th:text="${post.userName}"></td>
+        <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- 페이징 -->
+</body>
+</html>
