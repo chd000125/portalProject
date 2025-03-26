@@ -16,7 +16,7 @@
                         작성자: <span th:text="${post.userName}">작성자</span> |
                         작성일: <span th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></span>
                         <th:block th:if="${post.updatedAt != null}">
-                            | 수정일: <span th:text="${#temporals.format(board.updatedAt, 'yyyy-MM-dd')}"></span>
+                            | 수정일: <span th:text="${#temporals.format(post.updatedAt, 'yyyy-MM-dd')}"></span>
                         </th:block>
                     </div>
                 </div>

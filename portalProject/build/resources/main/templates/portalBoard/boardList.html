@@ -34,11 +34,18 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="post : ${board}">
-        <td th:text="${post.id}"></td>
+    <tr th:each="post,postStat : ${board}">
+        <td th:text="${postStat.count}"></td>
         <td><a th:href="@{/board/list/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
         <td th:text="${post.userName}"></td>
-        <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></td>
+        <td>
+            <th:block th:if="${post.updatedAt != null}">
+                <div th:text="${#temporals.format(post.updatedAt, 'yyyy-MM-dd')}" />
+            </th:block>
+            <th:block th:if="${post.updatedAt == null}">
+                <div th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}" />
+            </th:block>
+        </td>
     </tr>
     </tbody>
 </table>

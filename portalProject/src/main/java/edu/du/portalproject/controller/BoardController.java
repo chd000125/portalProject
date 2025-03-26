@@ -87,7 +87,7 @@ public class BoardController {
         }
 
         model.addAttribute("post", post);
-        return "boardEdit";
+        return "portalBoard/boardEdit";
     }
 
     // ✅ 게시글 수정 처리
@@ -103,12 +103,16 @@ public class BoardController {
             redirectAttributes.addFlashAttribute("message", "본인만 수정할 수 있습니다.");
             return "redirect:/board/list";
         }
-
-        post.setTitle(title);
-        post.setContent(content);
-        boardService.updatePost(post);
-
-        return "portalBoard/boardEdit";
+        // 변경된 값으로 적용하기
+        Board udPost = Board.builder()
+                .id(id)
+                .title(title)
+                .content(content)
+                .userName(account.getName())
+                .createdAt(LocalDateTime.now())
+                .build();
+        boardService.updatePost(udPost);
+        return "redirect:/board/list/{id}";
     }
 
     // ✅ 게시글 삭제 (본인만 가능)

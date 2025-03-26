@@ -37,11 +37,7 @@ public class BoardService {
 
     // ✅ 게시글 수정
     public void updatePost(Board post) {
-        Board posts = getPostById(post.getId());
-        posts.setTitle(post.getTitle());
-        posts.setContent(post.getContent());
-        posts.setUpdatedAt(LocalDateTime.now());
-        boardRepository.save(posts);
+        boardRepository.save(post);
     }
 
     // ✅ 게시글 삭제

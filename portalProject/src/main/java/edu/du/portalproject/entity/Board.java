@@ -1,9 +1,7 @@
 package edu.du.portalproject.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +9,11 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "board")
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Board {
 
     @Id
